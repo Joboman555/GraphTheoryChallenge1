@@ -1,9 +1,8 @@
 
 infinity = float("inf")
 
-
-def radius(graph):
-    """The value of the smallest eccentricity in a graph"""
+def eccentricities(graph):
+    """Calculates the eccentricity of each node"""
     ecc = lambda node: eccentricity(node, graph)
     notZero = lambda n: n != 0
 
@@ -11,7 +10,7 @@ def radius(graph):
     # The radius only counts connected pathways, so we will discard
     # These zeroes.
     eccentricities = filter(notZero, map(ecc, graph))
-    return min(eccentricities)
+    return eccentricities
 
 
 def eccentricity(node, graph):
@@ -52,4 +51,10 @@ if __name__ == "__main__":
     # keys being the source nodes and the values being a list of
     # destination nodes.
     testNodes = {1: [2, 3], 2: [1], 3: []}
-    print(radius(testNodes))
+    eccs = eccentricities(testNodes)
+    print("")
+    # Radius is the smallest eccentricity
+    print("Raidus: " + str(min(eccs)))
+    # Diameter is the largest eccentricity
+    print("Diameter: " + str(max(eccs)))
+    print("")

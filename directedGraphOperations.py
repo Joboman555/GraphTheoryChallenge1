@@ -1,15 +1,29 @@
-# Our Directed Graph is represented as a dictionary with the
-# keys being the source nodes and the values being a list of
-# destination nodes.
 
 infinity = float("inf")
+
+
+def radius(graph):
+    """The value of the smallest eccentricity in a graph"""
+    ecc = lambda node: eccentricity(node, graph)
+    notZero = lambda n: n != 0
+
+    # Eccentricity of a node connected to nothing will be zero.
+    # The radius only counts connected pathways, so we will discard
+    # These zeroes.
+    eccentricities = filter(notZero, map(ecc, graph))
+    return min(eccentricities)
+
 
 def eccentricity(node, graph):
     """The greatest distance from a node in a graph to any other node"""
     dist = lambda distanceNode: distance(node, distanceNode, graph)
-    distances = map(dist, graph)
-    filteredDistances = filter(lambda dist: dist != infinity, distances)
-    return max(filteredDistances)
+    notInf = lambda dist: dist != infinity
+
+    # Distance of a node connected to nothing will be infinity.
+    # Eccentricity only counts connected pathways, so we will discard
+    # These infinities.
+    distances = filter(notInf, map(dist, graph))
+    return max(distances)
 
 
 def distance(sourceNode, destinationNode, graph):
@@ -34,5 +48,8 @@ def distance(sourceNode, destinationNode, graph):
 
 
 if __name__ == "__main__":
+    # Our Directed Graph is represented as a dictionary with the
+    # keys being the source nodes and the values being a list of
+    # destination nodes.
     testNodes = {1: [2, 3], 2: [1], 3: []}
-    print(eccentricity(3, testNodes))
+    print(radius(testNodes))

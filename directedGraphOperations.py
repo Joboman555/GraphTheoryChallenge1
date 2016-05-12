@@ -1,4 +1,4 @@
-
+from readGraph import readGraph
 infinity = float("inf")
 
 def eccentricities(graph):
@@ -50,8 +50,8 @@ if __name__ == "__main__":
     # Our Directed Graph is represented as a dictionary with the
     # keys being the source nodes and the values being a list of
     # destination nodes.
-    testNodes = {1: [2, 3], 2: [1], 3: []}
-    eccs = eccentricities(testNodes)
+    graph = readGraph('testInput.txt')
+    eccs = eccentricities(graph)
     print("")
     # Radius is the smallest eccentricity
     print("Raidus: " + str(min(eccs)))

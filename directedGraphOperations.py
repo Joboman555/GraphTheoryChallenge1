@@ -27,31 +27,40 @@ def eccentricity(node, graph):
 
 def distance(sourceNode, destinationNode, graph):
     """calculates the distance from one node in a graph to another"""
-    if destinationNode not in graph:
-        raise IndexError("Node " + str(destinationNode) + " Not in Graph")
-    if sourceNode not in graph:
-        raise IndexError("Node " + str(sourceNode) + " Not in Graph")
+    distance = 0
+    sourceNodes = [sourceNode]
+    while True:
+        distance += 1
+        nextNodes = []
+        # print(sourceNodes)
+        for sourceNode in sourceNodes:
+            if destinationNode not in graph:
+                raise IndexError("Node " + str(destinationNode) + " Not in Graph")
+            if sourceNode not in graph:
+                raise IndexError("Node " + str(sourceNode) + " Not in Graph")
 
-    if sourceNode == destinationNode:
-        return 0
+            if sourceNode == destinationNode:
+                return 0
 
-    adjacentNodes = graph[sourceNode]
-    if destinationNode in adjacentNodes:
-        return 1
-    if not adjacentNodes:
-        return infinity
-    distances = []
-    for adjacentNode in adjacentNodes:
-        distances.append(1 + distance(adjacentNode, destinationNode, graph))
-    return min(distances)
+            adjacentNodes = graph[sourceNode]
+            if destinationNode in adjacentNodes:
+                return distance
+
+            nextNodes += adjacentNodes
+        # Make sure we aren't in an infinite loop
+        if sourceNodes == list(set(nextNodes)):
+            return infinity
+        # Only get unique nodes
+        sourceNodes = list(set(nextNodes))
 
 
 if __name__ == "__main__":
     # Our Directed Graph is represented as a dictionary with the
     # keys being the source nodes and the values being a list of
     # destination nodes.
-    graph = readGraph('testInput.txt')
+    graph = readGraph('challengeInput.txt')
     eccs = eccentricities(graph)
+
     print("")
     # Radius is the smallest eccentricity
     print("Raidus: " + str(min(eccs)))

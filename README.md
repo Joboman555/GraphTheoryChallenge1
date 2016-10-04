@@ -1,6 +1,7 @@
 # Graph Radius and Diameter Challenge
 
-An introductory graph theory challenge taken from [/r/dailyprogrammer](https://www.reddit.com/r/dailyprogrammer/)'s [Challenge #266](https://www.reddit.com/r/dailyprogrammer/comments/4iut1x/20160511_challenge_266_intermediate_graph_radius/?ref=share&ref_source=link)
+An introductory graph theory challenge taken from [/r/dailyprogrammer](https://www.reddit.com/r/dailyprogrammer/)'s [Challenge #266](https://www.reddit.com/r/dailyprogrammer/comments/4iut1x/20160511_challenge_266_intermediate_graph_radius/?ref=share&ref_source=link).
+
 Executing directedGraphOperations.py will calculate the radius and diameter of a 36 node graph with 147 connections.
 The challenge description is as follows:
 ## Description
